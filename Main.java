@@ -13,9 +13,9 @@ public class Main {
         File file2=null;
         ResourceBundle resBun= ResourceBundle.getBundle("res", Locale.getDefault());
         try {
-            System.out.println(resBun.getString("MessagePathSlov1"));
+            System.out.println(new String(resBun.getString("MessagePathSlov1").getBytes("ISO8859-1"),"UTF-8"));
             check.notFile(file1=new File(read.readLine()));
-            System.out.println(resBun.getString("MessagePathSlov2"));
+            System.out.println(new String(resBun.getString("MessagePathSlov2").getBytes("ISO8859-1"),"UTF-8"));
             check.notFile(file2=new File(read.readLine()));
         } catch (IOException e) {
             e.printStackTrace();

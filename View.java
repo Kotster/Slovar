@@ -29,13 +29,13 @@ public class View {
         String key="";
         ISlovar obj=null;
         try {
-            System.out.println(resBun.getString("Menu"));
+            System.out.println(new String(resBun.getString("Menu").getBytes("ISO8859-1"),"UTF-8"));
 
             while (!(key=read.readLine()).equals("z")) {
                 switch (key){
                     case "1":
-                        System.out.println(resBun.getString("Slov1"));
-                        System.out.println(resBun.getString("Slov2"));
+                        System.out.println(new String(resBun.getString("Slov1").getBytes("ISO8859-1"),"UTF-8"));
+                        System.out.println(new String(resBun.getString("Slov2").getBytes("ISO8859-1"),"UTF-8"));
                         boolean flag=true;
                         while (flag&&!(key=read.readLine()).equals("z")) {
                             switch (key){
@@ -48,7 +48,7 @@ public class View {
                                     flag=false;
                                     break;
                                 default:
-                                    System.out.println(resBun.getString("1or2"));
+                                    System.out.println(new String(resBun.getString("1or2").getBytes("ISO8859-1"),"UTF-8"));
                                     break;
                             }
                         }
@@ -58,34 +58,34 @@ public class View {
                             service.Show(obj);
                         }
                         else{
-                            System.out.println(resBun.getString("SelectSlov"));
+                            System.out.println(new String(resBun.getString("SelectSlov").getBytes("ISO8859-1"),"UTF-8"));
                         }
                         break;
                     case "3":
                         String Key,Value;
-                        System.out.println(resBun.getString("WriteKey"));
+                        System.out.println(new String(resBun.getString("WriteKey").getBytes("ISO8859-1"),"UTF-8"));
                         Key=read.readLine();
-                        System.out.println(resBun.getString("WriteValue"));
+                        System.out.println(new String(resBun.getString("WriteValue").getBytes("ISO8859-1"),"UTF-8"));
                         Value=read.readLine();
                         if(check.validKey(obj,Key)&&check.UnikalnKey(obj,Key)){
                             service.Add(obj,Key,Value);
                         }
                         else{
-                            System.out.println(resBun.getString("ErrorKey"));
+                            System.out.println(new String(resBun.getString("ErrorKey").getBytes("ISO8859-1"),"UTF-8"));
                         }
                         break;
                     case "4":
-                        System.out.println(resBun.getString("WriteKey"));
+                        System.out.println(new String(resBun.getString("WriteKey").getBytes("ISO8859-1"),"UTF-8"));
                         Key=read.readLine();
                         service.Delete(obj,Key);
                         break;
                     case "5":
-                        System.out.println(resBun.getString("WriteKey"));
+                        System.out.println(new String(resBun.getString("WriteKey").getBytes("ISO8859-1"),"UTF-8"));
                         Key=read.readLine();
                         System.out.println(service.Serch(obj,Key));
                         break;
                 }
-                System.out.println(resBun.getString("Menu"));
+                System.out.println(new String(resBun.getString("Menu").getBytes("ISO8859-1"),"UTF-8"));
             }
         } catch (IOException e) {
             e.printStackTrace();
