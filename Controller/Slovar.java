@@ -1,13 +1,37 @@
+package Slov.Controller;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class SlovService implements ISlovService{
+
+public class Slovar implements ISlovService{
+    private File file;
+    private int KeyLength;
+    private String reg;
     BufferedReader read;
     BufferedWriter write;
-    public void Show(ISlovar s){
-        ISlovar slovar=s;
+
+    public Slovar(File file, int KeyLength, String reg) {
+        this.file=file;
+        this.KeyLength=KeyLength;
+        this.reg=reg;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public int getKeyLength() {
+        return KeyLength;
+    }
+
+    public String getReg() {
+        return reg;
+    }
+
+    public void Show(){
         try {
-            read=new BufferedReader(new FileReader(slovar.getFile()));
+            read=new BufferedReader(new FileReader(Check.notFile(file)));
             while (read.ready()){
                 System.out.println(read.readLine());
             }
@@ -16,10 +40,9 @@ public class SlovService implements ISlovService{
             e.printStackTrace();
         }
     }
-    public void Delete(ISlovar s,String key){
+    public void Delete(String key){
         ArrayList<String> arr=new ArrayList<>();
-        ISlovar slovar=s;
-        File file=slovar.getFile();
+        File file=Check.notFile(this.file);
         try {
             read=new BufferedReader(new FileReader(file));
             while (read.ready()){
@@ -40,9 +63,8 @@ public class SlovService implements ISlovService{
             e.printStackTrace();
         }
     }
-    public String Serch(ISlovar s,String key){
-        ISlovar slovar=s;
-        File file=slovar.getFile();
+    public String Serch(String key){
+        File file=Check.notFile(this.file);
         String str="";
         try {
             read=new BufferedReader(new FileReader(file));
@@ -55,12 +77,12 @@ public class SlovService implements ISlovService{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Значение не найдено";
+        return "Key not find";
     }
-    public void Add(ISlovar s,String key, String value){
-        String str="";
-        ISlovar slovar=s;
-        File file=slovar.getFile();
+    public void Add(String key, String value) throws NotUniqException{
+        if (Check.UnikalnKey(this,key)) {
+            String str="";
+            File file=Check.notFile(this.file);
             try {
                 write=new BufferedWriter(new FileWriter(file,true));
                 write.write(key+"-"+value+System.lineSeparator());
@@ -69,5 +91,13 @@ public class SlovService implements ISlovService{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else
+            throw new NotUniqException();
+    }
+    public class NotUniqException extends Exception{
+        public NotUniqException() {
+            super("The key is not uniq");
+        }
     }
 }

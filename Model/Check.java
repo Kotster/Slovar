@@ -1,7 +1,9 @@
+package Slov.Model;
 import java.io.*;
+import Controller.*;
 
 public class Check {
-    public void notFile(File f){
+    public static File notFile(File f){
         try {
             if(!f.exists()) {
                 f.createNewFile();
@@ -9,14 +11,15 @@ public class Check {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return f;
     }
-    public boolean validKey(ISlovar slovar, String key){
+    public static boolean validKey(ISlovService slovar, String key){
         if (key.length()==slovar.getKeyLength()&&key.matches(slovar.getReg())) {
             return true;
         }
         return false;
     }
-    public boolean UnikalnKey(ISlovar slovar, String key){
+    public static boolean UnikalnKey(Slovar slovar, String key){
         BufferedReader read= null;
         String str=null;
         try {
