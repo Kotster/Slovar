@@ -1,6 +1,8 @@
-package Slov.Model;
+package com.example.Model;
 
-import Controller.*;
+
+import com.example.Controller.ISlovService;
+import com.example.Controller.Slovar;
 
 public class SlovService{
 
@@ -9,20 +11,20 @@ public class SlovService{
     public void Show(ISlovService service){
         service.Show();
     }
-    void Delete(ISlovService service, String key) throws ValidKeyException{
+    public void Delete(ISlovService service, String key) throws ValidKeyException{
         if(Check.validKey(service,key)){
             service.Delete(key);
         }
         else
         throw new ValidKeyException();
     }
-    String Serch(ISlovService service, String key) throws ValidKeyException{
+    public String Serch(ISlovService service, String key) throws ValidKeyException{
         if (Check.validKey(service,key)) {
             return service.Serch(key);
         }
         throw new  ValidKeyException();
     }
-    void Add(ISlovService service, String key, String Value) throws ValidKeyException, Slovar.NotUniqException {
+    public void Add(ISlovService service, String key, String Value) throws ValidKeyException, Slovar.NotUniqException {
         if (Check.validKey(service,key)) {
                 service.Add(key,Value);
         }

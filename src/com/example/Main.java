@@ -1,8 +1,9 @@
-package Slov;
+package com.example;
 
-import Controller.*;
-import View.*;
-import Model.*;
+import com.example.Controller.ISlovService;
+import com.example.Controller.Slovar;
+import com.example.Model.SlovService;
+import com.example.View.View;
 
 import java.io.BufferedReader;
 import java.io.File;

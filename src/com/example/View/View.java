@@ -1,4 +1,9 @@
-package Slov.View;
+package com.example.View;
+
+import com.example.CONST;
+import com.example.Controller.ISlovService;
+import com.example.Model.SlovService;
+import com.example.Controller.Slovar;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,7 +16,7 @@ public class View {
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
     private List<ISlovService> slovars;
     SlovService service;
-    public View(List s, SlovService ss){
+    public View(List<ISlovService> s, SlovService ss){
         service=ss;
         slovars= s;
     }
@@ -19,7 +24,7 @@ public class View {
     public void start() {
         PropertyResourceBundle resBun= null;
         try {
-            resBun = new PropertyResourceBundle(new FileReader("C:\Users\Admin\Desktop\Java\Slovar\\res.properties"));
+            resBun = new PropertyResourceBundle(new FileReader("C:\\Users\\Admin\\Desktop\\project\\src\\com\\example\\res.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

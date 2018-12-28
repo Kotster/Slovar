@@ -1,6 +1,9 @@
-package Slov.Model;
+package com.example.Model;
+
+import com.example.Controller.ISlovService;
+import com.example.Controller.Slovar;
+
 import java.io.*;
-import Controller.*;
 
 public class Check {
     public static File notFile(File f){

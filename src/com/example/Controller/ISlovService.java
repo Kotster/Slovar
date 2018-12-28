@@ -1,4 +1,4 @@
-package Slov.Controller;
+package com.example.Controller;
 
 public interface ISlovService {
     void Show();

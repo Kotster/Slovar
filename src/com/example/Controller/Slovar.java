@@ -1,10 +1,11 @@
-package Slov.Controller;
+package com.example.Controller;
+
+import com.example.Model.Check;
 
 import java.io.*;
 import java.util.ArrayList;
 
-
-public class Slovar implements ISlovService{
+public class Slovar implements ISlovService {
     private File file;
     private int KeyLength;
     private String reg;
