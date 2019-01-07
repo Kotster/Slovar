@@ -1,3 +1,3 @@
-javac -Xlint -d bin -sourcepath src src\com\example\Main.java
-java -classpath bin com.example.Main
+javac -Xlint -d bin -sourcepath src -classpath lib\spring-framework-5.1.3.RELEASE\libs\spring-context-5.1.3.RELEASE.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-core-5.1.3.RELEASE.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-beans-5.1.3.RELEASE.jar src\com\example\Main.java
+java -classpath bin;lib\commons-logging-1.2\commons-logging-1.2.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-context-5.1.3.RELEASE.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-core-5.1.3.RELEASE.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-beans-5.1.3.RELEASE.jar;lib\spring-framework-5.1.3.RELEASE\libs\spring-expression-5.1.3.RELEASE.jar com.example.Main
 pause

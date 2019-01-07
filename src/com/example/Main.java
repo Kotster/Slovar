@@ -1,5 +1,8 @@
 package com.example;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 import com.example.Controller.ISlovService;
 import com.example.Controller.Slovar;
 import com.example.Model.SlovService;
@@ -13,10 +16,10 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
-
-        ISlovService slovar1=new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
-        ISlovService slovar2=new Slovar(new File("slovar5Num"),5,"^[0-9]+$");
+		ApplicationContext ctx=new FileSystemXmlApplicationContext("config.xml");
+		
+        ISlovService slovar1=(ISlovService)ctx.getBean("slovarOne");//new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
+        ISlovService slovar2=(ISlovService)ctx.getBean("slovarTwo");//new Slovar(new File("slovar5Num"),5,"^[0-9]+$");
         ArrayList<ISlovService> arrSlov=new ArrayList<>();
 
         arrSlov.add(slovar1);

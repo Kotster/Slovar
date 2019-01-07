@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 public class View {
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
@@ -25,11 +26,11 @@ public class View {
     public void start() {
         PropertyResourceBundle resBun= null;
         try {
-            resBun = new PropertyResourceBundle(new FileReader("C:\\Users\\Admin\\Desktop\\project\\src\\com\\example\\res.properties"));
+            resBun = new PropertyResourceBundle(new FileReader("src\\com\\example\\res.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+		
         String key="";
         ISlovService obj=null;
         try {
