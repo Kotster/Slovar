@@ -2,11 +2,10 @@ package Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name="spitter")
 public class SlovarModel {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -21,7 +20,7 @@ public class SlovarModel {
     private String nameTable;
 
     @Autowired
-    dbControl control;
+    DbControl control;
 
     public SlovarModel(String key, String value) {
         this.key = key;
@@ -39,7 +38,7 @@ public class SlovarModel {
         this.nameTable = nameTable;
     }
 
-        public dbControl getControl() {
+        public DbControl getControl() {
         return control;
     }
 //

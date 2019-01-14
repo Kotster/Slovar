@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class dbControl implements ISlovService{
+public class DbControl implements ISlovService{
 
     @Autowired
     private HibernateTemplate template;
