@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ISlovService;
+import Controller.SlovarModel;
 import Model.SlovService;
 
 import java.io.BufferedReader;
@@ -13,9 +14,9 @@ import java.util.PropertyResourceBundle;
 
 public class View {
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
-    private List<ISlovService> slovars;
+    private List<SlovarModel> slovars;
     SlovService service;
-    public View(List<ISlovService> s, SlovService ss){
+    public View(List<SlovarModel> s, SlovService ss){
         service=ss;
         slovars= s;
     }
@@ -29,7 +30,8 @@ public class View {
         }
 
         String key="";
-        ISlovService obj=null;
+        //ISlovService obj=null;
+        SlovarModel obj = null;
         try {
             System.out.println(resBun.getString(CONST.menu));
 

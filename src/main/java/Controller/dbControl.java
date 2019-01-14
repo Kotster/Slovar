@@ -21,7 +21,7 @@ public class dbControl implements ISlovService{
     }
 
     public List<String> Serch(String Key) {
-        return this.template.find("from Controller.SlovarModel slovar where slovar=?", Key);
+        return template.find("from Controller.SlovarModel dictionary where dictionary=?", Key);
     }
 
     public void Add(String Key, String Value) {

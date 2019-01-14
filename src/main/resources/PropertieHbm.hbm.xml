@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="Controller.SlovarModel" table="">
+    <class name="Controller.SlovarModel" table="dictionary">
         <id column="id" name="id" type="java.lang.Integer">
             <generator class="native" />
         </id>

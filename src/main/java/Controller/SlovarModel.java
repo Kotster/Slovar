@@ -1,5 +1,7 @@
 package Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,13 +11,41 @@ public class SlovarModel {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int Id;
-    @Column(unique = true, nullable = false)
+    @Column(name="key", unique = true, nullable = false)
     private String key;
-    @Column(nullable = false)
+    @Column(name="key", nullable = false)
     private String value;
 
     private int KeyLength;
     private String reg;
+    private String nameTable;
+
+    @Autowired
+    dbControl control;
+
+    public SlovarModel(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public SlovarModel() {
+    }
+
+    public String getNameTable() {
+        return nameTable;
+    }
+
+    public void setNameTable(String nameTable) {
+        this.nameTable = nameTable;
+    }
+
+        public dbControl getControl() {
+        return control;
+    }
+//
+//    public void setControl(dbControl control) {
+//        this.control = control;
+//    }
 
     public int getKeyLength() {
         return KeyLength;
@@ -31,14 +61,6 @@ public class SlovarModel {
 
     public void setReg(String reg) {
         this.reg = reg;
-    }
-
-    public SlovarModel(String key, String value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public SlovarModel() {
     }
 
     public int getId() {
