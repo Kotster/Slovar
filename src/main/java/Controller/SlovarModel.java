@@ -14,6 +14,25 @@ public class SlovarModel {
     @Column(nullable = false)
     private String value;
 
+    private int KeyLength;
+    private String reg;
+
+    public int getKeyLength() {
+        return KeyLength;
+    }
+
+    public void setKeyLength(int keyLength) {
+        KeyLength = keyLength;
+    }
+
+    public String getReg() {
+        return reg;
+    }
+
+    public void setReg(String reg) {
+        this.reg = reg;
+    }
+
     public SlovarModel(String key, String value) {
         this.key = key;
         this.value = value;

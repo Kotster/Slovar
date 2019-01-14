@@ -62,20 +62,20 @@ public class View {
                         Value=read.readLine();
                         try {
                             service.Add(obj,Key,Value);
-                        } catch (SlovService.ValidKeyException e) {
-                            System.out.println(resBun.getString(CONST.ErrorKey));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
                         }
-                        catch (Slovar.NotUniqException e) {
-                            System.out.println(resBun.getString(CONST.NotUniqKey));
-                        }
+//                        catch (Exception e) {
+//                            System.out.println(resBun.getString(CONST.NotUniqKey));
+//                        }
                         break;
                     case "4":
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();
                         try {
                             service.Delete(obj,Key);
-                        } catch (SlovService.ValidKeyException e) {
-                            System.out.println(resBun.getString(CONST.ErrorKey));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
                         }
                         break;
                     case "5":
@@ -83,8 +83,8 @@ public class View {
                         Key=read.readLine();
                         try {
                             System.out.println(service.Serch(obj,Key));
-                        } catch (SlovService.ValidKeyException e) {
-                            System.out.println(resBun.getString(CONST.ErrorKey));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
                         }
                         break;
                 }

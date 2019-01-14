@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class dbControl implements ISlovService{
 
@@ -18,19 +20,12 @@ public class dbControl implements ISlovService{
 
     }
 
-    public String Serch(String Key) {
-
-        return template.get(SlovarModel.class,Key);
+    public List<String> Serch(String Key) {
+        return this.template.find("from Controller.SlovarModel slovar where slovar=?", Key);
     }
 
-    public void Add(String Key, String Value) throws NotUniqException {
+    public void Add(String Key, String Value) {
         SlovarModel slovarModel=new SlovarModel(Key,Value);
         template.saveOrUpdate(slovarModel);
-    }
-
-    public class NotUniqException extends Exception{
-        public NotUniqException() {
-            super("The key is not uniq");
-        }
     }
 }
