@@ -1,0 +1,10 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="persist">
+        <class>Controller.SlovarModel</class>
+        <properties>
+            <property name="toplink.jdbc.driver" value="org.postgresql.jdbcDriver" />
+            <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/test"/>
+            <property name="toplink.jdbc.user" value="postgres" />
+            <property name="toplink.jdbc.password" value="postgres" />
+        </properties>
+    </persistence-unit> </persistence>
