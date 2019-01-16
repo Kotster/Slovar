@@ -9,7 +9,7 @@ public class SlovService{
     public SlovService() {
     }
     public void Show(SlovarModel service){
-        service.getControl().Show();
+        //service.getControl().Show();
     }
     public void Delete(SlovarModel service, String key) throws Exception{
         if(Check.validKey(service,key)){

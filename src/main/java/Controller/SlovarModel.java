@@ -1,24 +1,19 @@
 package Controller;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 
-@Repository
+@Entity
+@Table(name="dictionary")
 public class SlovarModel {
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int Id;
     @Column(name="key", unique = true, nullable = false)
     private String key;
-    @Column(name="key", nullable = false)
+    @Column(name="vlaue", nullable = false)
     private String value;
 
     private int KeyLength;
@@ -34,10 +29,6 @@ public class SlovarModel {
     }
 
     public SlovarModel() {
-    }
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
     }
 
     public String getNameTable() {
