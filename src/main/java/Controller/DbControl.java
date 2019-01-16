@@ -5,13 +5,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.spi.PersistenceProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,15 +26,10 @@ import java.util.List;
 public class DbControl implements ISlovService{
 
     @Autowired
-    private SessionFactory sessionFactory;
-
+    private LocalEntityManagerFactoryBean factoryBean;
     Session currentSession() {
-        try {
-            return sessionFactory.getCurrentSession();
-        }
-        catch (HibernateException e){
-            return sessionFactory.openSession();
-        }
+        PersistenceProvider persistenceProvider =factoryBean.getPersistenceProvider();
+        EntityManagerFactory entityManagerFactory=persistenceProvider.createEntityManagerFactory();
     }
 
     public void Show() {
@@ -38,8 +38,9 @@ public class DbControl implements ISlovService{
 
     public void Delete(String Key) {
         List<String> list=Serch(Key);
-        SlovarModel slovarModel=new SlovarModel(list.get(0),list.get(1));
-        Session session=currentSession();
+        SlovarModel slovarModel=new SlovarModel(list.get(1),list.get(2));
+        slovarModel.setId(Integer.parseInt(list.get(0)));
+        Session session=;
         Transaction transaction=session.beginTransaction();
         session.delete(slovarModel);
         transaction.commit();
@@ -64,7 +65,7 @@ public class DbControl implements ISlovService{
         Root<SlovarModel> root=query.from(SlovarModel.class);
         SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), Key))).getResultList().get(0);
         transaction.commit();
-        return new ArrayList<String>(Arrays.asList(slovarModel.getKey(),slovarModel.getValue()));
+        return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue()));
     }
 
     public void Add(String Key, String Value) {
