@@ -1,27 +1,22 @@
 package Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name="dictionary")
+@Table(name="dictionar")
 public class SlovarModel {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int Id;
+    private int id;
     @Column(name="key", unique = true, nullable = false)
     private String key;
-    @Column(name="vlaue", nullable = false)
+    @Column(name="value", nullable = false)
     private String value;
 
     private int KeyLength;
     private String reg;
     private String nameTable;
-
-    @Autowired
-    DbControl control;
 
     public SlovarModel(String key, String value) {
         this.key = key;
@@ -31,6 +26,10 @@ public class SlovarModel {
     public SlovarModel() {
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNameTable() {
         return nameTable;
     }
@@ -38,14 +37,6 @@ public class SlovarModel {
     public void setNameTable(String nameTable) {
         this.nameTable = nameTable;
     }
-
-        public DbControl getControl() {
-        return control;
-    }
-//
-//    public void setControl(dbControl control) {
-//        this.control = control;
-//    }
 
     public int getKeyLength() {
         return KeyLength;
@@ -64,7 +55,7 @@ public class SlovarModel {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getKey() {

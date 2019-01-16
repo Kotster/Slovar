@@ -1,3 +1,4 @@
+import Controller.DbControl;
 import Controller.ISlovService;
 import Controller.SlovarModel;
 import Model.SlovService;
@@ -12,12 +13,12 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext ctx=new FileSystemXmlApplicationContext("config.xml");
 
-        SlovarModel slovar1=(SlovarModel) ctx.getBean("slovarOne");//new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
-        SlovarModel slovar2=(SlovarModel)ctx.getBean("slovarTwo");//new Slovar(new File("slovar5Num"),5,"^[0-9]+$");
-        ArrayList<SlovarModel> arrSlov=new ArrayList<SlovarModel>();
+        ISlovService slovar1=(ISlovService) ctx.getBean("dbControl");//new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
+        //SlovarModel slovar2=(SlovarModel)ctx.getBean("slovarTwo");//new Slovar(new File("slovar5Num"),5,"^[0-9]+$");
+        ArrayList<ISlovService> arrSlov=new ArrayList<>();
 
         arrSlov.add(slovar1);
-        arrSlov.add(slovar2);
+        //arrSlov.add(slovar2);
 
 
         SlovService service=new SlovService();

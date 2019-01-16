@@ -14,9 +14,9 @@ import java.util.PropertyResourceBundle;
 
 public class View {
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
-    private List<SlovarModel> slovars;
+    private List<ISlovService> slovars;
     SlovService service;
-    public View(List<SlovarModel> s, SlovService ss){
+    public View(List<ISlovService> s, SlovService ss){
         service=ss;
         slovars= s;
     }
@@ -24,14 +24,14 @@ public class View {
     public void start() {
         PropertyResourceBundle resBun= null;
         try {
-            resBun = new PropertyResourceBundle(new FileReader("C:\\Users\\Admin\\IdeaProjects\\TestMaven\\src\\main\\resources\\res.properties"));
+            resBun = new PropertyResourceBundle(new FileReader("src\\main\\resources\\res.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         String key="";
         //ISlovService obj=null;
-        SlovarModel obj = null;
+        ISlovService obj = null;
         try {
             System.out.println(resBun.getString(CONST.menu));
 
