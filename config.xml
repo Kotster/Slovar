@@ -14,5 +14,5 @@
 		<property name="persistenceUnitName" value="persistence" />
 	</bean>
 
-	<context:component-scan base-package="Controller, com" />
+	<context:component-scan base-package="Controller" />
 </beans>

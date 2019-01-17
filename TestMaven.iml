@@ -13,9 +13,9 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="persistence" />
+          <factory-entry name="persistence" value="82293002-70aa-47b5-978d-d5b89549a43e" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/target/classes/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>
