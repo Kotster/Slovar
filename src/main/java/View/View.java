@@ -37,6 +37,8 @@ public class View {
 
             while (!(key=read.readLine()).equals("z")) {
                 switch (key){
+
+
                     case "1":
                         System.out.println(resBun.getString(CONST.Slov1));
                         while ((key=read.readLine()).matches("^\\d+$")) {
@@ -48,6 +50,8 @@ public class View {
                             break;
                         }
                         break;
+
+
                     case "2":
                         if(obj!=null){
                             System.out.println(service.Show(obj));
@@ -56,6 +60,8 @@ public class View {
                             System.out.println(resBun.getString(CONST.SelectSlov));
                         }
                         break;
+
+
                     case "3":
                         String Key,Value;
                         System.out.println(resBun.getString(CONST.WriteKey));
@@ -71,6 +77,8 @@ public class View {
 //                            System.out.println(resBun.getString(CONST.NotUniqKey));
 //                        }
                         break;
+
+
                     case "4":
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();
@@ -80,6 +88,8 @@ public class View {
                             System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
                         }
                         break;
+
+
                     case "5":
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();
@@ -89,6 +99,8 @@ public class View {
                             System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
                         }
                         break;
+
+
                     case "6":
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();

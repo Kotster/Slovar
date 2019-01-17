@@ -10,13 +10,13 @@ import java.io.IOException;
 
 public class Check {
     public static File notFile(File f){
-        try {
             if(!f.exists()) {
-                f.createNewFile();
+                try {
+                    f.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return f;
     }
     public static boolean validKey(SlovarModel slovar, String key){

@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext ctx=new FileSystemXmlApplicationContext("config.xml");
 
-        ISlovService slovar1=(ISlovService) ctx.getBean("dbControl");//new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
+        ISlovService slovar1=(ISlovService) ctx.getBean("fileControl");//new Slovar(new File("slovar4Lat"),4,"^[a-zA-Z]+$");
         //SlovarModel slovar2=(SlovarModel)ctx.getBean("slovarTwo");//new Slovar(new File("slovar5Num"),5,"^[0-9]+$");
         ArrayList<ISlovService> arrSlov=new ArrayList<>();
 
