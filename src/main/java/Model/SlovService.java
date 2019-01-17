@@ -8,8 +8,8 @@ public class SlovService{
 
     public SlovService() {
     }
-    public void Show(ISlovService service){
-        //service.getControl().Show();
+    public List<String> Show(ISlovService service){
+        return service.All();
     }
     public void Delete(ISlovService service, String key) throws Exception{
         //if(Check.validKey(service,key)){
@@ -30,6 +30,13 @@ public class SlovService{
         //}
         //else
             //throw new Exception("Error");
+    }
+    public void Update(ISlovService service, String key, String Value) throws Exception{
+        //if (Check.validKey(service,key)) {
+        service.Update(key,Value);
+        //}
+        //else
+        //throw new Exception("Error");
     }
 //    public class ValidKeyException extends Exception{
 //        ValidKeyException(){

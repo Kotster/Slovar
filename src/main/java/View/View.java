@@ -50,7 +50,7 @@ public class View {
                         break;
                     case "2":
                         if(obj!=null){
-                            service.Show(obj);
+                            System.out.println(service.Show(obj));
                         }
                         else{
                             System.out.println(resBun.getString(CONST.SelectSlov));
@@ -85,6 +85,17 @@ public class View {
                         Key=read.readLine();
                         try {
                             System.out.println(service.Serch(obj,Key));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
+                        }
+                        break;
+                    case "6":
+                        System.out.println(resBun.getString(CONST.WriteKey));
+                        Key=read.readLine();
+                        System.out.println(resBun.getString(CONST.WriteValue));
+                        Value=read.readLine();
+                        try {
+                            service.Update(obj,Key,Value);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
                         }

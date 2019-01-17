@@ -73,4 +73,9 @@ public class SlovarModel {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "id:"+this.getId()+" | key:"+this.getKey()+" | value:"+this.getValue()+"\n\r";
+    }
 }

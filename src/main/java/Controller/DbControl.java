@@ -32,13 +32,33 @@ public class DbControl implements ISlovService{
         }
     }
 
-    public void Show() {
+    public List<String> All() {
+        List<SlovarModel> slovarModels;
+        Session session=currentSession().getSessionFactory().openSession();
+        Transaction transaction=session.beginTransaction();
+        CriteriaBuilder cb =session.getCriteriaBuilder();
+        CriteriaQuery<SlovarModel> query=cb.createQuery(SlovarModel.class);
+        Root<SlovarModel> root=query.from(SlovarModel.class);
+        slovarModels= session.createQuery(query).getResultList();
+        transaction.commit();
+        return Arrays.asList(slovarModels.toString());
+    }
 
+    public void Update(String Key, String Value) {
+        List<String> list=Serch(Key);
+        SlovarModel slovarModel=new SlovarModel(Key,Value);
+        slovarModel.setId(Integer.parseInt(list.get(0)));
+        Session session=currentSession();
+        Transaction transaction=session.beginTransaction();
+        session.update(slovarModel);
+        transaction.commit();
+        session.close();
     }
 
     public void Delete(String Key) {
         List<String> list=Serch(Key);
-        SlovarModel slovarModel=new SlovarModel(list.get(0),list.get(1));
+        SlovarModel slovarModel=new SlovarModel(list.get(1),list.get(2));
+        slovarModel.setId(Integer.parseInt(list.get(0)));
         Session session=currentSession();
         Transaction transaction=session.beginTransaction();
         session.delete(slovarModel);
@@ -64,7 +84,8 @@ public class DbControl implements ISlovService{
         Root<SlovarModel> root=query.from(SlovarModel.class);
         SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), Key))).getResultList().get(0);
         transaction.commit();
-        return new ArrayList<String>(Arrays.asList(slovarModel.getKey(),slovarModel.getValue()));
+        session.close();
+        return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue()));
     }
 
     public void Add(String Key, String Value) {
