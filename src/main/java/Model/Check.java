@@ -19,12 +19,12 @@ public class Check {
         }
         return f;
     }
-    public static boolean validKey(SlovarModel slovar, String key){
-        if (key.length()==slovar.getKeyLength()&&key.matches(slovar.getReg())) {
-            return true;
-        }
-        return false;
-    }
+//    public static boolean validKey(SlovarModel slovar, String key){
+//        if (key.length()==slovar.getKeyLength()&&key.matches(slovar.getReg())) {
+//            return true;
+//        }
+//        return false;
+//    }
 //    public static boolean UnikalnKey(Slovar slovar, String key){
 //        BufferedReader read= null;
 //        String str=null;

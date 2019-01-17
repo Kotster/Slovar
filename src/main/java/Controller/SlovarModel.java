@@ -14,9 +14,9 @@ public class SlovarModel {
     @Column(name="value", nullable = false)
     private String value;
 
-    private int KeyLength;
-    private String reg;
-    private String nameTable;
+    //private int KeyLength;
+    //private String reg;
+    //private String nameTable;
 
     public SlovarModel(String key, String value) {
         this.key = key;
@@ -30,29 +30,29 @@ public class SlovarModel {
         this.id = id;
     }
 
-    public String getNameTable() {
-        return nameTable;
-    }
-
-    public void setNameTable(String nameTable) {
-        this.nameTable = nameTable;
-    }
-
-    public int getKeyLength() {
-        return KeyLength;
-    }
-
-    public void setKeyLength(int keyLength) {
-        KeyLength = keyLength;
-    }
-
-    public String getReg() {
-        return reg;
-    }
-
-    public void setReg(String reg) {
-        this.reg = reg;
-    }
+//    public String getNameTable() {
+//        return nameTable;
+//    }
+//
+//    public void setNameTable(String nameTable) {
+//        this.nameTable = nameTable;
+//    }
+//
+//    public int getKeyLength() {
+//        return KeyLength;
+//    }
+//
+//    public void setKeyLength(int keyLength) {
+//        KeyLength = keyLength;
+//    }
+//
+//    public String getReg() {
+//        return reg;
+//    }
+//
+//    public void setReg(String reg) {
+//        this.reg = reg;
+//    }
 
     public int getId() {
         return id;
