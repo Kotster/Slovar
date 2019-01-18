@@ -47,8 +47,7 @@ public class FileControl implements ISlovService{
             }
             read.close();
             write = new BufferedWriter(new FileWriter(file));
-            for (String str : arr
-                    ) {
+            for (String str : arr) {
                 if (!str.split("-")[0].equals(key)) {
                     write.write(str + System.lineSeparator());
                 }

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,25 +66,25 @@ public class DbControl implements ISlovService{
     }
 
     public List<String> Serch(String Key) {
-//        List<String> list;
-//        Session session=currentSession();
+        List<String> list;
+        Session session=currentSession();
 //        Transaction transaction=session.beginTransaction();
-//        Query query=session.createSQLQuery("select key,value from dictionar where dictionar.key= :keyTable");
-//        query.setParameter("keyTable",Key);
-//        list=query.getResultList();
+        Query query=session.createSQLQuery("select test.public.dictionar.key,test.public.dictionar.value from dictionar as d where d.key=>keyTable");
+        query.setParameter("keyTable",Key);
+        list=query.getResultList();
+//        transaction.commit();
+        session.close();
+        System.out.println(list.get(0));
+        return list;
+//        Session session=currentSession().getSessionFactory().openSession();
+//        Transaction transaction=session.beginTransaction();
+//        CriteriaBuilder cb =session.getCriteriaBuilder();
+//        CriteriaQuery<SlovarModel> query=cb.createQuery(SlovarModel.class);
+//        Root<SlovarModel> root=query.from(SlovarModel.class);
+//        SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), Key))).getResultList().get(0);
 //        transaction.commit();
 //        session.close();
-//        System.out.println(list.get(0));
-//        return list;
-        Session session=currentSession().getSessionFactory().openSession();
-        Transaction transaction=session.beginTransaction();
-        CriteriaBuilder cb =session.getCriteriaBuilder();
-        CriteriaQuery<SlovarModel> query=cb.createQuery(SlovarModel.class);
-        Root<SlovarModel> root=query.from(SlovarModel.class);
-        SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), Key))).getResultList().get(0);
-        transaction.commit();
-        session.close();
-        return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue()));
+//        return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue()));
     }
 
     public void Add(String Key, String Value) {
