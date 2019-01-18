@@ -16,7 +16,7 @@ public class SlovarModel {
 
     private int KeyLength;
     private String reg;
-    private String nameTable;
+    private String name;
 
     public SlovarModel(String key, String value) {
         this.key = key;
@@ -30,12 +30,12 @@ public class SlovarModel {
         this.id = id;
     }
 
-    public String getNameTable() {
-        return nameTable;
+    public String getname() {
+        return name;
     }
 
-    public void setNameTable(String nameTable) {
-        this.nameTable = nameTable;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public int getKeyLength() {
