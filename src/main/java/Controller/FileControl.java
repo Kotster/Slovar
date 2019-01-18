@@ -4,6 +4,7 @@ package Controller;
 import Model.Check;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Qualifier("fl")
 public class FileControl implements ISlovService{
     BufferedReader read;
     BufferedWriter write;

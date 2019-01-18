@@ -7,18 +7,16 @@
 							 http://www.springframework.org/schema/context
 							 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-
-	<!--<bean id="slovarOne" class="Controller.SlovarModel">-->
-	<!--<constructor-arg index="0" value="slovar5Number"/>-->
-	<!--<constructor-arg index="1" value="4"/>-->
-	<!--<property name="reg" value="^[a-zA-Z]+$"/>-->
-	<!--</bean>-->
-
-	<!--<bean id="slovarTwo" class="Controller.SlovarModel">-->
-	<!--<constructor-arg index="0" value="slovar4Lat"/>-->
-	<!--<constructor-arg index="1" value="5"/>-->
-	<!--<property name="reg" value="^[0-9]+$"/>-->
-	<!--</bean>-->
+	<bean id="dictionary1" class="Controller.SlovarModel">
+		<constructor-arg  name="name" value="dictionary1"/>
+		<constructor-arg  name="reg" value="^[a-zA-Z]+$"/>
+		<constructor-arg  name="KeyLength" value="4"/>
+	</bean>
+	<bean id="dictionary2" class="Controller.SlovarModel">
+		<constructor-arg  name="name" value="dictionary2"/>
+		<constructor-arg  name="reg" value="^[0-9]+$"/>
+		<constructor-arg  name="KeyLength" value="5"/>
+	</bean>
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -30,12 +28,6 @@
 	<bean id="sessionFactory"
 		   class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!--<property name="annotatedPackages" value="Controller"/>-->
-		<!--<property name="packagesToScan">-->
-			<!--<list>-->
-				<!--<value>Controller</value>-->
-			<!--</list>-->
-		<!--</property>-->
 		<property name="mappingResources" value="PropertieHbm.hbm.xml"/>
 		<property name="hibernateProperties">
 			<props>
@@ -46,29 +38,5 @@
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 	<context:component-scan base-package="Controller" />
-
-	<!--<bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">-->
-	<!--<property name="persistenceUnitName" value="persist" />-->
-	<!--</bean>-->
-
-	<!--<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">-->
-	<!--<property name="database" value="POSTGRESQL" />-->
-	<!--<property name="showSql" value="true"/>-->
-	<!--<property name="generateDdl" value="false"/>-->
-	<!--<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL9Dialect" />-->
-	<!--</bean>-->
-
-
-	<!--<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-	<!--<property name="dataSource" ref="dataSource" />-->
-		<!--<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />-->
-	<!--</bean>-->
-
-
-
-	<!--<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">-->
-		<!--<property name="sessionFactory" ref="sessionFactory" />-->
-	<!--</bean>-->
-
 
 </beans>							

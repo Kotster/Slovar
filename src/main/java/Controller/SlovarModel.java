@@ -23,6 +23,12 @@ public class SlovarModel {
         this.value = value;
     }
 
+    public SlovarModel(String reg, int KeyLength, String name) {
+        this.reg = reg;
+        this.KeyLength = KeyLength;
+        this.name=name;
+    }
+
     public SlovarModel() {
     }
 
