@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-@Qualifier("fl")
 public class FileControl implements ISlovService{
     BufferedReader read;
     BufferedWriter write;

@@ -9,4 +9,5 @@ public abstract class CONST {
     public static final String NoIndexSlovArr="NoIndexSlovArr";
     public static final String ErrorKey="ErrorKey";
     public static final String NotUniqKey="NotUniqKey";
+    public static final String SelectControl="SelectControl";
 }

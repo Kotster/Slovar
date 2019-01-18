@@ -18,7 +18,6 @@ import java.util.List;
 
 @Repository
 @Transactional
-@Qualifier("db")
 public class DbControl implements ISlovService{
 
     @Autowired

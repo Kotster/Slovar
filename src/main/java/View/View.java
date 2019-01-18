@@ -1,23 +1,41 @@
 package View;
 
-import Controller.SlovarModel;
+//import Controller.ISlovService;
+import Controller.*;
 import Model.SlovService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 
-
+@Component
 public class View {
+
+    @Autowired
+    @Qualifier("fileControl")
+    ISlovService serviceFl;
+
+    @Autowired
+    @Qualifier("dbControl")
+    ISlovService serviceDb;
+
+
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
     private List<SlovarModel> slovars;
+    private List<ISlovService> controls=Arrays.asList(serviceFl,serviceDb);
     SlovService service;
     public View(List<SlovarModel> s, SlovService ss){
         service=ss;
         slovars= s;
+    }
+    public View(){
     }
 
     public void start() {
@@ -30,12 +48,24 @@ public class View {
 
         String key="";
         SlovarModel obj = null;
+        ISlovService control = null;
         try {
             System.out.println(resBun.getString(CONST.menu));
 
             while (!(key=read.readLine()).equals("z")) {
                 switch (key){
 
+                    case "0":
+                        System.out.println(resBun.getString(CONST.SelectControl));
+                        while ((key=read.readLine()).matches("^\\d+$")) {
+                            if(slovars.size()>Integer.parseInt(key)){
+                                control=controls.get(Integer.parseInt(key));
+                            }else{
+                                System.out.println(resBun.getString(CONST.NoIndexSlovArr));
+                            }
+                            break;
+                        }
+                        break;
 
                     case "1":
                         System.out.println(resBun.getString(CONST.Slov1));
@@ -52,7 +82,7 @@ public class View {
 
                     case "2":
                         if(obj!=null){
-                            System.out.println(service.Show());
+                            System.out.println(service.Show(control));
                         }
                         else{
                             System.out.println(resBun.getString(CONST.SelectSlov));
@@ -67,7 +97,7 @@ public class View {
                         System.out.println(resBun.getString(CONST.WriteValue));
                         Value=read.readLine();
                         try {
-                            service.Add(obj,Key,Value);
+                            service.Add(obj,control,Key,Value);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
                         }
@@ -81,7 +111,7 @@ public class View {
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();
                         try {
-                            service.Delete(obj,Key);
+                            service.Delete(obj,control,Key);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
                         }
@@ -92,7 +122,7 @@ public class View {
                         System.out.println(resBun.getString(CONST.WriteKey));
                         Key=read.readLine();
                         try {
-                            System.out.println(service.Serch(obj,Key));
+                            System.out.println(service.Serch(obj,control,Key));
                         } catch (Exception e) {
                             System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
                         }
@@ -105,7 +135,7 @@ public class View {
                         System.out.println(resBun.getString(CONST.WriteValue));
                         Value=read.readLine();
                         try {
-                            service.Update(obj,Key,Value);
+                            service.Update(obj,control,Key,Value);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
                         }
