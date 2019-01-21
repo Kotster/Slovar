@@ -1,6 +1,5 @@
 package View;
 
-//import Controller.ISlovService;
 import Controller.*;
 import Model.SlovService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +25,27 @@ public class View {
     @Qualifier("dbControl")
     ISlovService serviceDb;
 
+    @Autowired
+    @Qualifier("dictionary1")
+    SlovarModel model1;
+
+    @Autowired
+    @Qualifier("dictionary2")
+    SlovarModel model2;
+
+    @Autowired
+    @Qualifier("service")
+    SlovService service;
+
+
 
     private BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
-    private List<SlovarModel> slovars;
-    private List<ISlovService> controls=Arrays.asList(serviceFl,serviceDb);
-    SlovService service;
-    public View(List<SlovarModel> s, SlovService ss){
-        service=ss;
-        slovars= s;
-    }
     public View(){
     }
 
     public void start() {
+        List<SlovarModel> slovars=Arrays.asList(model1,model2);
+        List<ISlovService> controls=Arrays.asList(serviceFl,serviceDb);
         PropertyResourceBundle resBun= null;
         try {
             resBun = new PropertyResourceBundle(new FileReader("src\\main\\resources\\res.properties"));
@@ -99,11 +106,8 @@ public class View {
                         try {
                             service.Add(obj,control,Key,Value);
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
+                            System.out.println(e.getMessage());
                         }
-//                        catch (Exception e) {
-//                            System.out.println(resBun.getString(CONST.NotUniqKey));
-//                        }
                         break;
 
 
@@ -113,7 +117,7 @@ public class View {
                         try {
                             service.Delete(obj,control,Key);
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());//resBun.getString(CONST.ErrorKey));
+                            System.out.println(e.getMessage());
                         }
                         break;
 
@@ -124,7 +128,7 @@ public class View {
                         try {
                             System.out.println(service.Serch(obj,control,Key));
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
+                            System.out.println(e.getMessage());
                         }
                         break;
 
@@ -137,7 +141,7 @@ public class View {
                         try {
                             service.Update(obj,control,Key,Value);
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());//System.out.println(resBun.getString(CONST.ErrorKey));
+                            System.out.println(e.getMessage());
                         }
                         break;
                 }

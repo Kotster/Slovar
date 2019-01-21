@@ -37,6 +37,6 @@
 	</bean>
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-	<context:component-scan base-package="Controller,View,java" />
+	<context:component-scan base-package="Controller,View,Model" />
 
 </beans>							

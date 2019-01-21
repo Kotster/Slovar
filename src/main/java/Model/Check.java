@@ -1,11 +1,8 @@
 package Model;
 
-import Controller.ISlovService;
 import Controller.SlovarModel;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class Check {
@@ -25,7 +22,7 @@ public class Check {
         }
         return false;
     }
-//    public static boolean UnikalnKey(Slovar slovar, String key){
+//    public static boolean unikalnKey(Slovar slovar, String key){
 //        BufferedReader read= null;
 //        String str=null;
 //        try {

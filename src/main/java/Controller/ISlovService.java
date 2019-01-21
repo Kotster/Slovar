@@ -3,9 +3,9 @@ package Controller;
 import java.util.List;
 
 public interface ISlovService {
-    List<String> All();
-    void Update(String Key, String Value);
-    void Delete(String key);
-    List<String> Serch(String Key);
-    void Add(String Key, String Value);
+    List<String> all();
+    void update(String Key, String Value);
+    void delete(String key);
+    List<String> serch(String Key) throws Exception;
+    void add(String Key, String Value);
 }

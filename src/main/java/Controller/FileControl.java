@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,10 +19,11 @@ public class FileControl implements ISlovService{
     BufferedReader read;
     BufferedWriter write;
     File file=new File("resources");
+
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<String> All() {
+    public List<String> all() {
         try {
             read = new BufferedReader(new FileReader(Check.notFile(file)));
             while (read.ready()) {
@@ -34,11 +37,24 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void Update(String Key, String Value) {
-
+    public void update(String Key, String Value) {
+        String str="";
+        try {
+            List<String> content=new ArrayList<>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
+            for (int i = 0; i < content.size(); i++) {
+                if(content.get(i).split("-")[0].equals(Key)){
+                    content.set(i, Key+" - "+Value);
+                    break;
+                }
+            }
+            Files.write(file.toPath(), content, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void Delete(String key) {
+    @Override
+    public void delete(String key) {
         ArrayList<String> arr = new ArrayList<>();
         File file = Check.notFile(this.file);
         try {
@@ -61,24 +77,26 @@ public class FileControl implements ISlovService{
         }
     }
 
-    public List<String> Serch(String key) {
+    @Override
+    public List<String> serch(String key) throws Exception {
         File file = Check.notFile(this.file);
         String str = "";
         try {
             read = new BufferedReader(new FileReader(file));
             while (read.ready()) {
                 if ((str = read.readLine()).split("-")[0].equals(key)) {
-                    return Arrays.asList("");
+                    return Arrays.asList(str);
                 }
             }
             read.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.asList("");
+        throw new Exception("SerchError");
     }
 
-    public void Add(String key, String value) {
+    @Override
+    public void add(String key, String value) {
 
         String str = "";
         File file = Check.notFile(this.file);

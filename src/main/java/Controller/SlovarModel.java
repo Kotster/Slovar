@@ -2,8 +2,8 @@ package Controller;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="dictionar")
+//@Entity
+//@Table(name="dictionar")
 public class SlovarModel {
 
     @Id
