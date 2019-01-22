@@ -1,11 +1,9 @@
 package Controller;
 
-import org.hibernate.*;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.dialect.PostgreSQL95Dialect;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.type.StandardBasicTypeTemplate;
-import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +14,6 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 @Repository
 @Transactional
@@ -34,8 +30,8 @@ public class DbControl implements ISlovService{
             return sessionFactory.openSession();
         }
     }
-
-    public List<String> all() {
+    @Override
+    public List<String> all(SlovarModel model) {
         List<String> list;
         List<SlovarModel> slovarModels;
         Session session=currentSession().getSessionFactory().openSession();
@@ -43,24 +39,26 @@ public class DbControl implements ISlovService{
         CriteriaBuilder cb =session.getCriteriaBuilder();
         CriteriaQuery<SlovarModel> query=cb.createQuery(SlovarModel.class);
         Root<SlovarModel> root=query.from(SlovarModel.class);
-        slovarModels= session.createQuery(query).getResultList();
+        slovarModels= session.createQuery(query.where(cb.like(root.get("name"),"%"+model.getName()+"%"))).getResultList();
         transaction.commit();
         return Arrays.asList(slovarModels.toString());
     }
 
-    public void update(String Key, String Value) {
-        List<String> list=serch(Key);
-        SlovarModel slovarModel=new SlovarModel(Key,Value);
+    @Override
+    public void update(SlovarModel model) {
+        List<String> list=serch(model);
+        SlovarModel slovarModel=new SlovarModel(model.getKey(),model.getValue());
         slovarModel.setId(Integer.parseInt(list.get(0)));
+        slovarModel.setname(model.getName());
         Session session=currentSession();
         Transaction transaction=session.beginTransaction();
         session.update(slovarModel);
         transaction.commit();
         session.close();
     }
-
-    public void delete(String Key) {
-        List<String> list=serch(Key);
+    @Override
+    public void delete(SlovarModel model) {
+        List<String> list=serch(model);
         SlovarModel slovarModel=new SlovarModel(list.get(1),list.get(2));
         slovarModel.setId(Integer.parseInt(list.get(0)));
         Session session=currentSession();
@@ -69,8 +67,8 @@ public class DbControl implements ISlovService{
         transaction.commit();
         session.close();
     }
-
-    public List<String> serch(String Key) {
+    @Override
+    public List<String> serch(SlovarModel model) {
 //        List<String> list;
 //        Session session=currentSession();
 ////        Transaction transaction=session.beginTransaction();
@@ -86,16 +84,16 @@ public class DbControl implements ISlovService{
         CriteriaBuilder cb =session.getCriteriaBuilder();
         CriteriaQuery<SlovarModel> query=cb.createQuery(SlovarModel.class);
         Root<SlovarModel> root=query.from(SlovarModel.class);
-        SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), Key))).getResultList().get(0);
+        SlovarModel slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), model.getKey()))).getResultList().get(0);
         transaction.commit();
         session.close();
         return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue()));
     }
-
-    public void add(String Key, String Value) {
+    @Override
+    public void add(SlovarModel model) {
         Session session=currentSession();
         Transaction transaction=session.beginTransaction();
-        session.save("dictionar2", new SlovarModel(Key,Value));
+        session.save(new SlovarModel(model.getKey(),model.getValue(),model.getName()));
         transaction.commit();
         session.close();
     }

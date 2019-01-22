@@ -18,14 +18,10 @@ import java.util.List;
 public class FileControl implements ISlovService{
     BufferedReader read;
     BufferedWriter write;
-    File file=new File("resources");
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    public List<String> all() {
+    public List<String> all(SlovarModel model) {
         try {
-            read = new BufferedReader(new FileReader(Check.notFile(file)));
+            read = new BufferedReader(new FileReader(Check.notFile(new File(model.getName()))));
             while (read.ready()) {
                 System.out.println(read.readLine());
             }
@@ -37,13 +33,13 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void update(String Key, String Value) {
-        String str="";
+    public void update(SlovarModel model) {
+        File file=Check.notFile(new File(model.getName()));
         try {
             List<String> content=new ArrayList<>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
             for (int i = 0; i < content.size(); i++) {
-                if(content.get(i).split("-")[0].equals(Key)){
-                    content.set(i, Key+" - "+Value);
+                if(content.get(i).split("-")[0].equals(model.getKey())){
+                    content.set(i, model.getKey()+"-"+model.getValue());
                     break;
                 }
             }
@@ -54,9 +50,9 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void delete(String key) {
+    public void delete(SlovarModel model) {
+        File file=Check.notFile(new File(model.getName()));
         ArrayList<String> arr = new ArrayList<>();
-        File file = Check.notFile(this.file);
         try {
             read = new BufferedReader(new FileReader(file));
             while (read.ready()) {
@@ -65,7 +61,7 @@ public class FileControl implements ISlovService{
             read.close();
             write = new BufferedWriter(new FileWriter(file));
             for (String str : arr) {
-                if (!str.split("-")[0].equals(key)) {
+                if (!str.split("-")[0].equals(model.getKey())) {
                     write.write(str + System.lineSeparator());
                 }
             }
@@ -78,13 +74,13 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public List<String> serch(String key) throws Exception {
-        File file = Check.notFile(this.file);
+    public List<String> serch(SlovarModel model) throws Exception {
+        File file = Check.notFile(new File(model.getName()));
         String str = "";
         try {
             read = new BufferedReader(new FileReader(file));
             while (read.ready()) {
-                if ((str = read.readLine()).split("-")[0].equals(key)) {
+                if ((str = read.readLine()).split("-")[0].trim().equals(model.getKey())) {
                     return Arrays.asList(str);
                 }
             }
@@ -96,14 +92,12 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void add(String key, String value) {
-
-        String str = "";
-        File file = Check.notFile(this.file);
+    public void add(SlovarModel model) {
+        File file = Check.notFile(new File(model.getName()));
 
         try {
             write = new BufferedWriter(new FileWriter(file, true));
-            write.write(key + "-" + value + System.lineSeparator());
+            write.write(model.getKey() + "-" + model.getValue() + System.lineSeparator());
             write.flush();
             write.close();
         } catch (IOException e) {

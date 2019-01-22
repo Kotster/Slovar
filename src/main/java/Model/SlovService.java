@@ -13,32 +13,37 @@ public class SlovService{
 
     public SlovService() {
     }
-    public List<String> Show(ISlovService service){
-        return service.all();
+
+    public List<String> Show(ISlovService service, SlovarModel model){
+        return service.all(model);
     }
-    public void Delete(SlovarModel model,ISlovService service, String key) throws Exception{
-        if(Check.validKey(model,key)){
-            service.delete(key);
+
+    public void Delete(SlovarModel model,ISlovService service) throws Exception{
+        if(Check.validKey(model)){
+            service.delete(model);
         }
         else
             throw new Exception("Error");
     }
-    public List<String> Serch(SlovarModel model, ISlovService service, String key) throws Exception{
-        if (Check.validKey(model,key)) {
-            return service.serch(key);
+
+    public List<String> Serch(SlovarModel model, ISlovService service) throws Exception{
+        if (Check.validKey(model)) {
+            return service.serch(model);
         }
         throw new Exception("Error");
     }
-    public void Add(SlovarModel model, ISlovService service, String key, String Value) throws Exception{
-        if (Check.validKey(model,key)) {
-            service.add(key,Value);
+
+    public void Add(SlovarModel model, ISlovService service) throws Exception{
+        if (Check.validKey(model)) {
+            service.add(model);
         }
         else
             throw new Exception("Error");
     }
-    public void Update(SlovarModel model, ISlovService service, String key, String Value) throws Exception{
-        if (Check.validKey(model,key)) {
-        service.update(key,Value);
+
+    public void Update(SlovarModel model, ISlovService service) throws Exception{
+        if (Check.validKey(model)) {
+        service.update(model);
         }
         else
         throw new Exception("Error");

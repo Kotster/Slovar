@@ -54,7 +54,7 @@ public class View {
         }
 
         String key="";
-        SlovarModel obj = null;
+        SlovarModel model = null;
         ISlovService control = null;
         try {
             System.out.println(resBun.getString(CONST.menu));
@@ -78,7 +78,7 @@ public class View {
                         System.out.println(resBun.getString(CONST.Slov1));
                         while ((key=read.readLine()).matches("^\\d+$")) {
                             if(slovars.size()>Integer.parseInt(key)){
-                                obj=slovars.get(Integer.parseInt(key));
+                                model=slovars.get(Integer.parseInt(key));
                             }else{
                                 System.out.println(resBun.getString(CONST.NoIndexSlovArr));
                             }
@@ -88,8 +88,8 @@ public class View {
 
 
                     case "2":
-                        if(obj!=null){
-                            System.out.println(service.Show(control));
+                        if(model!=null){
+                            System.out.println(service.Show(control, model));
                         }
                         else{
                             System.out.println(resBun.getString(CONST.SelectSlov));
@@ -100,11 +100,11 @@ public class View {
                     case "3":
                         String Key,Value;
                         System.out.println(resBun.getString(CONST.WriteKey));
-                        Key=read.readLine();
+                        model.setKey(read.readLine());
                         System.out.println(resBun.getString(CONST.WriteValue));
-                        Value=read.readLine();
+                        model.setValue(read.readLine());
                         try {
-                            service.Add(obj,control,Key,Value);
+                            service.Add(model,control);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -113,9 +113,9 @@ public class View {
 
                     case "4":
                         System.out.println(resBun.getString(CONST.WriteKey));
-                        Key=read.readLine();
+                        model.setKey(read.readLine());
                         try {
-                            service.Delete(obj,control,Key);
+                            service.Delete(model,control);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -124,9 +124,9 @@ public class View {
 
                     case "5":
                         System.out.println(resBun.getString(CONST.WriteKey));
-                        Key=read.readLine();
+                        model.setKey(read.readLine());
                         try {
-                            System.out.println(service.Serch(obj,control,Key));
+                            System.out.println(service.Serch(model,control));
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -135,11 +135,11 @@ public class View {
 
                     case "6":
                         System.out.println(resBun.getString(CONST.WriteKey));
-                        Key=read.readLine();
+                        model.setKey(read.readLine());
                         System.out.println(resBun.getString(CONST.WriteValue));
-                        Value=read.readLine();
+                        model.setValue(read.readLine());
                         try {
-                            service.Update(obj,control,Key,Value);
+                            service.Update(model,control);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }

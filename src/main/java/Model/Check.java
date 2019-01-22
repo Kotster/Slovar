@@ -16,8 +16,8 @@ public class Check {
             }
         return f;
     }
-    public static boolean validKey(SlovarModel slovar, String key){
-        if (key.length()==slovar.getKeyLength()&&key.matches(slovar.getReg())) {
+    public static boolean validKey(SlovarModel slovar){
+        if (slovar.getKey().length()==slovar.getKeyLength()&&slovar.getKey().matches(slovar.getReg())) {
             return true;
         }
         return false;

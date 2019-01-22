@@ -2,8 +2,8 @@ package Controller;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="dictionar")
+@Entity
+@Table(name="dictionar")
 public class SlovarModel {
 
     @Id
@@ -13,11 +13,17 @@ public class SlovarModel {
     private String key;
     @Column(name="value", nullable = false)
     private String value;
+    @Column(name="name", nullable = false)
 
     private int KeyLength;
     private String reg;
     private String name;
 
+    public SlovarModel(String key, String value, String name) {
+        this.key = key;
+        this.value = value;
+        this.name=name;
+    }
     public SlovarModel(String key, String value) {
         this.key = key;
         this.value = value;
@@ -36,7 +42,7 @@ public class SlovarModel {
         this.id = id;
     }
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
@@ -82,6 +88,6 @@ public class SlovarModel {
 
     @Override
     public String toString() {
-        return "id:"+this.getId()+" | key:"+this.getKey()+" | value:"+this.getValue()+"\n\r";
+        return "id:"+this.getId()+" | key:"+this.getKey()+" | value:"+this.getValue()+"| nameDictionary:"+this.getName()+"\n\r";
     }
 }
