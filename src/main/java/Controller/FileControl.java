@@ -50,7 +50,7 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void delete(SlovarModel model) {
+    public void delete(SlovarModel model){
         File file=Check.notFile(new File(model.getName()));
         ArrayList<String> arr = new ArrayList<>();
         try {
@@ -92,14 +92,30 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void add(SlovarModel model) {
+    public void add(SlovarModel model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
+        unikalnKey(model);
 
         try {
             write = new BufferedWriter(new FileWriter(file, true));
             write.write(model.getKey() + "-" + model.getValue() + System.lineSeparator());
             write.flush();
             write.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void unikalnKey(SlovarModel model) throws Exception {
+        BufferedReader read= null;
+        String str=null;
+        File file=null;
+        try {
+            read = new BufferedReader(new FileReader(model.getName()));
+            while (read.ready()){
+                if((str=read.readLine()).split("-")[0].equals(model.getKey())){
+                    throw new Exception("Key not uniq");
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

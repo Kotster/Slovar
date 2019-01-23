@@ -88,7 +88,7 @@ public class View {
 
 
                     case "2":
-                        if(model!=null){
+                        if(model!=null&&control!=null){
                             System.out.println(service.Show(control, model));
                         }
                         else{
@@ -98,51 +98,67 @@ public class View {
 
 
                     case "3":
-                        String Key,Value;
-                        System.out.println(resBun.getString(CONST.WriteKey));
-                        model.setKey(read.readLine());
-                        System.out.println(resBun.getString(CONST.WriteValue));
-                        model.setValue(read.readLine());
-                        try {
-                            service.Add(model,control);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                        if(model!=null&&control!=null) {
+                            String Key, Value;
+                            System.out.println(resBun.getString(CONST.WriteKey));
+                            model.setKey(read.readLine());
+                            System.out.println(resBun.getString(CONST.WriteValue));
+                            model.setValue(read.readLine());
+                            try {
+                                service.Add(model, control);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
+                        else
+                            System.out.println(resBun.getString(CONST.SelectSlov));
                         break;
 
 
                     case "4":
-                        System.out.println(resBun.getString(CONST.WriteKey));
-                        model.setKey(read.readLine());
-                        try {
-                            service.Delete(model,control);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                        if(model!=null&&control!=null) {
+                            System.out.println(resBun.getString(CONST.WriteKey));
+                            model.setKey(read.readLine());
+                            try {
+                                service.Delete(model, control);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
+                        else
+                            System.out.println(resBun.getString(CONST.SelectSlov));
                         break;
 
 
                     case "5":
-                        System.out.println(resBun.getString(CONST.WriteKey));
-                        model.setKey(read.readLine());
-                        try {
-                            System.out.println(service.Serch(model,control));
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                        if(model!=null&&control!=null) {
+                            System.out.println(resBun.getString(CONST.WriteKey));
+                            model.setKey(read.readLine());
+                            try {
+                                System.out.println(service.Serch(model, control));
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
+                        else
+                            System.out.println(resBun.getString(CONST.SelectSlov));
                         break;
 
 
                     case "6":
-                        System.out.println(resBun.getString(CONST.WriteKey));
-                        model.setKey(read.readLine());
-                        System.out.println(resBun.getString(CONST.WriteValue));
-                        model.setValue(read.readLine());
-                        try {
-                            service.Update(model,control);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                        if(model!=null&&control!=null) {
+                            System.out.println(resBun.getString(CONST.WriteKey));
+                            model.setKey(read.readLine());
+                            System.out.println(resBun.getString(CONST.WriteValue));
+                            model.setValue(read.readLine());
+                            try {
+                                service.Update(model, control);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
+                        else
+                            System.out.println(resBun.getString(CONST.SelectSlov));
                         break;
                 }
                 System.out.println(resBun.getString(CONST.menu));

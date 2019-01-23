@@ -7,5 +7,5 @@ public interface ISlovService {
     void update(SlovarModel model);
     void delete(SlovarModel model);
     List<String> serch(SlovarModel model) throws Exception;
-    void add(SlovarModel model);
+    void add(SlovarModel model) throws Exception;
 }
