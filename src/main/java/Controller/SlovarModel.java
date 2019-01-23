@@ -14,10 +14,10 @@ public class SlovarModel {
     @Column(name="value", nullable = false)
     private String value;
     @Column(name="name", nullable = false)
+    private String name;
 
     private int KeyLength;
     private String reg;
-    private String name;
 
     public SlovarModel(String key, String value, String name) {
         this.key = key;
