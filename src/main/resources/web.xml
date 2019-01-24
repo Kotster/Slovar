@@ -1,0 +1,10 @@
+<servlet>
+    <servlet-name>Model</servlet-name>
+    <servlet-class>
+        <!--not find class-->
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+    <servlet-mapping>
+
+    </servlet-mapping>
+</servlet>

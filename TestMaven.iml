@@ -5,6 +5,7 @@
       <configuration>
         <fileset id="fileset" name="Config" removed="false">
           <file>file://$MODULE_DIR$/config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/Model-servlet.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -48,5 +49,6 @@
     <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.8" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.1.4.RELEASE" level="project" />
   </component>
 </module>
