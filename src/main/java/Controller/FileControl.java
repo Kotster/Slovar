@@ -36,7 +36,7 @@ public class FileControl implements ISlovService{
     public void update(SlovarModel model) {
         File file=Check.notFile(new File(model.getName()));
         try {
-            List<String> content=new ArrayList<>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
+            List<String> content=new ArrayList<String>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
             for (int i = 0; i < content.size(); i++) {
                 if(content.get(i).split("-")[0].equals(model.getKey())){
                     content.set(i, model.getKey()+"-"+model.getValue());
@@ -52,7 +52,7 @@ public class FileControl implements ISlovService{
     @Override
     public void delete(SlovarModel model){
         File file=Check.notFile(new File(model.getName()));
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<String> arr = new ArrayList<String>();
         try {
             read = new BufferedReader(new FileReader(file));
             while (read.ready()) {

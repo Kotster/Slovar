@@ -6,15 +6,20 @@
 
     <groupId>QwertyProj</groupId>
     <artifactId>TestMaven</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <webResources>Controller.WebConfig</webResources>
                 </configuration>
             </plugin>
         </plugins>
@@ -43,11 +48,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>5.1.4.RELEASE</version>
         </dependency>
@@ -56,16 +56,41 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>QwertyProj</groupId>
-            <artifactId>TestMaven</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-webmvc</artifactId>
             <version>5.1.4.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.4.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>juli</artifactId>
+            <version>6.0.53</version>
+        </dependency>
+
+
 
     </dependencies>
 
