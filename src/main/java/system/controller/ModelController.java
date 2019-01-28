@@ -11,6 +11,8 @@ import system.dao.ISlovService;
 import system.model.Model;
 import system.service.ModelService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -32,11 +34,12 @@ public class ModelController {
     @Autowired
     ModelService modelService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody
-    ModelAndView showModel() {
-        ModelAndView view=new ModelAndView();
-        view.addObject("msg", "1234");
-        return view;
+    HttpServletResponse showModel(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("msg", "texttext");
+        //ModelAndView view=new ModelAndView();
+        //view.addObject("msg", "1234");
+        return response;
     }
 }

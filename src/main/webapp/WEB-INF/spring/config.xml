@@ -46,6 +46,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 	<context:component-scan base-package="system"/>
 
 	<mvc:annotation-driven/>

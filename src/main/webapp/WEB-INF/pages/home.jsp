@@ -13,6 +13,6 @@
 </head>
 <body>
     <h1>Text</h1>
-    <h1>${msg}</h1>
+    <%= request.getParameter("msg") %>
 </body>
 </html>
