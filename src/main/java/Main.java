@@ -1,4 +1,4 @@
-import View.View;
+import system.View.View;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 

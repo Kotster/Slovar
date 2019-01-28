@@ -1,11 +1,9 @@
-package Controller;
+package system.dao;
 
 
-import Model.Check;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import system.Check;
 import org.springframework.stereotype.Component;
+import system.model.Model;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,11 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class FileControl implements ISlovService{
+public class FileDAO implements ISlovService {
     BufferedReader read;
     BufferedWriter write;
 
-    public List<String> all(SlovarModel model) {
+    public List<String> all(Model model) {
         try {
             read = new BufferedReader(new FileReader(Check.notFile(new File(model.getName()))));
             while (read.ready()) {
@@ -33,7 +31,7 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void update(SlovarModel model) {
+    public void update(Model model) {
         File file=Check.notFile(new File(model.getName()));
         try {
             List<String> content=new ArrayList<String>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
@@ -50,7 +48,7 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void delete(SlovarModel model){
+    public void delete(Model model){
         File file=Check.notFile(new File(model.getName()));
         ArrayList<String> arr = new ArrayList<String>();
         try {
@@ -74,7 +72,7 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public List<String> serch(SlovarModel model) throws Exception {
+    public List<String> serch(Model model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
         String str = "";
         try {
@@ -92,7 +90,7 @@ public class FileControl implements ISlovService{
     }
 
     @Override
-    public void add(SlovarModel model) throws Exception {
+    public void add(Model model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
         unikalnKey(model);
 
@@ -106,7 +104,7 @@ public class FileControl implements ISlovService{
         }
     }
 
-    public static void unikalnKey(SlovarModel model) throws Exception {
+    public static void unikalnKey(Model model) throws Exception {
         BufferedReader read= null;
         String str=null;
         File file=null;
