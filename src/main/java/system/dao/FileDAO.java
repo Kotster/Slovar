@@ -3,7 +3,7 @@ package system.dao;
 
 import system.Check;
 import org.springframework.stereotype.Component;
-import system.model.Model;
+import system.model.ModelDictionary;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +17,7 @@ public class FileDAO implements ISlovService {
     BufferedReader read;
     BufferedWriter write;
 
-    public List<String> all(Model model) {
+    public List<ModelDictionary> all(ModelDictionary model) {
         try {
             read = new BufferedReader(new FileReader(Check.notFile(new File(model.getName()))));
             while (read.ready()) {
@@ -27,11 +27,11 @@ public class FileDAO implements ISlovService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.asList("");
+        return new ArrayList<>();
     }
 
     @Override
-    public void update(Model model) {
+    public void update(ModelDictionary model) {
         File file=Check.notFile(new File(model.getName()));
         try {
             List<String> content=new ArrayList<String>(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
@@ -48,7 +48,7 @@ public class FileDAO implements ISlovService {
     }
 
     @Override
-    public void delete(Model model){
+    public void delete(ModelDictionary model){
         File file=Check.notFile(new File(model.getName()));
         ArrayList<String> arr = new ArrayList<String>();
         try {
@@ -72,7 +72,7 @@ public class FileDAO implements ISlovService {
     }
 
     @Override
-    public List<String> serch(Model model) throws Exception {
+    public List<String> serch(ModelDictionary model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
         String str = "";
         try {
@@ -90,7 +90,7 @@ public class FileDAO implements ISlovService {
     }
 
     @Override
-    public void add(Model model) throws Exception {
+    public void add(ModelDictionary model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
         unikalnKey(model);
 
@@ -104,7 +104,7 @@ public class FileDAO implements ISlovService {
         }
     }
 
-    public static void unikalnKey(Model model) throws Exception {
+    public static void unikalnKey(ModelDictionary model) throws Exception {
         BufferedReader read= null;
         String str=null;
         File file=null;

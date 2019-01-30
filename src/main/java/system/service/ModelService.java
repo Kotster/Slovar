@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import system.Check;
 import system.dao.ISlovService;
-import system.model.Model;
+import system.model.ModelDictionary;
 
 import java.util.List;
 
@@ -14,11 +14,12 @@ public class ModelService {
 
     public ModelService() {
     }
-    public List<String> Show(ISlovService service, Model model){
+    public List<ModelDictionary> Show(ISlovService service, ModelDictionary model){
+
         return service.all(model);
     }
 
-    public void Delete(Model model, ISlovService service) throws Exception{
+    public void Delete(ModelDictionary model, ISlovService service) throws Exception{
         if(Check.validKey(model)){
             service.delete(model);
         }
@@ -26,14 +27,14 @@ public class ModelService {
             throw new Exception("Not valid key");
     }
 
-    public List<String> Serch(Model model, ISlovService service) throws Exception{
+    public List<String> Serch(ModelDictionary model, ISlovService service) throws Exception{
         if (Check.validKey(model)) {
             return service.serch(model);
         }
         throw new Exception("Not valid key");
     }
 
-    public void Add(Model model, ISlovService service) throws Exception{
+    public void Add(ModelDictionary model, ISlovService service) throws Exception{
         if (Check.validKey(model)) {
             service.add(model);
         }
@@ -41,11 +42,11 @@ public class ModelService {
             throw new Exception("Not valid key");
     }
 
-    public void Update(Model model, ISlovService service) throws Exception{
-        if (Check.validKey(model)) {
+    public void Update(ModelDictionary model, ISlovService service) throws Exception{
+        //if (Check.validKey(model)) {
         service.update(model);
-        }
-        else
-        throw new Exception("Not valid key");
+        //}
+        //else
+        //throw new Exception("Not valid key");
     }
 }

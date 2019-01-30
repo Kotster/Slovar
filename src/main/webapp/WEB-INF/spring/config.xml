@@ -12,12 +12,12 @@
 							http://www.springframework.org/schema/mvc
 							http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<bean id="dictionary1" class="system.model.Model">
+	<bean id="dictionary1" class="system.model.ModelDictionary">
 		<constructor-arg  name="name" value="dictionary1"/>
 		<constructor-arg  name="reg" value="^[a-zA-Z]+$"/>
 		<constructor-arg  name="KeyLength" value="4"/>
 	</bean>
-	<bean id="dictionary2" class="system.model.Model">
+	<bean id="dictionary2" class="system.model.ModelDictionary">
 		<constructor-arg  name="name" value="dictionary2"/>
 		<constructor-arg  name="reg" value="^[0-9]+$"/>
 		<constructor-arg  name="KeyLength" value="5"/>

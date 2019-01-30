@@ -2,7 +2,7 @@ package system.View;
 
 import system.CONST;
 import system.dao.ISlovService;
-import system.model.Model;
+import system.model.ModelDictionary;
 import system.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,11 +29,11 @@ public class View {
 
     @Autowired
     @Qualifier("dictionary1")
-    Model model1;
+    ModelDictionary model1;
 
     @Autowired
     @Qualifier("dictionary2")
-    Model model2;
+    ModelDictionary model2;
 
     @Autowired
     @Qualifier("service")
@@ -46,7 +46,7 @@ public class View {
     }
 
     public void start() {
-        List<Model> slovars=Arrays.asList(model1,model2);
+        List<ModelDictionary> slovars=Arrays.asList(model1,model2);
         List<ISlovService> controls=Arrays.asList(serviceFl,serviceDb);
         PropertyResourceBundle resBun= null;
         try {
@@ -56,7 +56,7 @@ public class View {
         }
 
         String key="";
-        Model model = null;
+        ModelDictionary model = null;
         ISlovService control = null;
         try {
             System.out.println(resBun.getString(CONST.menu));

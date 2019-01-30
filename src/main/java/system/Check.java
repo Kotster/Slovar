@@ -1,6 +1,6 @@
 package system;
 
-import system.model.Model;
+import system.model.ModelDictionary;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Check {
             }
         return f;
     }
-    public static boolean validKey(Model slovar){
+    public static boolean validKey(ModelDictionary slovar){
         if (slovar.getKey().length()==slovar.getKeyLength()&&slovar.getKey().matches(slovar.getReg())) {
             return true;
         }

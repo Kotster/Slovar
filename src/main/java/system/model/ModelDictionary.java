@@ -1,10 +1,13 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="dictionar")
-public class Model {
+@JsonRootName("modelDictionary")
+public class ModelDictionary {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -19,23 +22,23 @@ public class Model {
     private int KeyLength;
     private String reg;
 
-    public Model(String key, String value, String name) {
+    public ModelDictionary(String key, String value, String name) {
         this.key = key;
         this.value = value;
         this.name=name;
     }
-    public Model(String key, String value) {
+    public ModelDictionary(String key, String value) {
         this.key = key;
         this.value = value;
     }
 
-    public Model(String reg, int KeyLength, String name) {
+    public ModelDictionary(String reg, int KeyLength, String name) {
         this.reg = reg;
         this.KeyLength = KeyLength;
         this.name=name;
     }
 
-    public Model() {
+    public ModelDictionary() {
     }
 
     public void setId(int id) {
@@ -88,6 +91,6 @@ public class Model {
 
     @Override
     public String toString() {
-        return "id:"+this.getId()+" | key:"+this.getKey()+" | value:"+this.getValue()+"| nameDictionary:"+this.getName()+"\n\r";
+        return "{\"id\":\""+this.getId()+"\",\"key\":\""+this.getKey()+"\",\"value\":\""+this.getValue()+"\",\"name\":\""+this.getName()+"\"}";
     }
 }

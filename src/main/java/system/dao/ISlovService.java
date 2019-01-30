@@ -1,13 +1,13 @@
 package system.dao;
 
-import system.model.Model;
+import system.model.ModelDictionary;
 
 import java.util.List;
 
 public interface ISlovService {
-    List<String> all(Model model);
-    void update(Model model);
-    void delete(Model model);
-    List<String> serch(Model model) throws Exception;
-    void add(Model model) throws Exception;
+    List<ModelDictionary> all(ModelDictionary model);
+    void update(ModelDictionary model);
+    void delete(ModelDictionary model);
+    List<String> serch(ModelDictionary model) throws Exception;
+    void add(ModelDictionary model) throws Exception;
 }

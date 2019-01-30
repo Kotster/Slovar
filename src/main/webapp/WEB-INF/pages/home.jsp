@@ -7,12 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
 </head>
-<body>
-    <h1>Text</h1>
-    <%= request.getParameter("msg") %>
-</body>
+    <body>
+    <form:form action="/dict" modelAttribute="model" method="post">
+        <form:select path="modelDictionary.name" onchange="submit();">
+            <form:option value=""></form:option>
+            <form:options items="${ListDict}"/>
+        </form:select>
+    </form:form>
+    </body>
 </html>
