@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form:form modelAttribute="model" action="/selectDict" method="post">
+    <form:form modelAttribute="model" action="select/selectDict" method="post">
         <form:select path="str" onchange="submit();">
             <form:option value=""></form:option>
             <form:options items="${list}"/>

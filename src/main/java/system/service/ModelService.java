@@ -20,11 +20,11 @@ public class ModelService {
     }
 
     public void Delete(ModelDictionary model, ISlovService service) throws Exception{
-        if(Check.validKey(model)){
+        //if(Check.validKey(model)){
             service.delete(model);
-        }
-        else
-            throw new Exception("Not valid key");
+        //}
+        //else
+            //throw new Exception("Not valid key");
     }
 
     public List<String> Serch(ModelDictionary model, ISlovService service) throws Exception{

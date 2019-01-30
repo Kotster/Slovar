@@ -45,27 +45,11 @@ public class ModelController {
         view.setViewName("home");
         return view;
     }
-
     @RequestMapping(value = "/dict", method=RequestMethod.POST)
     public String post(@ModelAttribute("model") ModelCont component, Model model)  {
         model.addAttribute("list", modelService.Show(service, component.getModelDictionary()));
         return "dictionary";
     }
-    @RequestMapping(value = "/selectDict", method=RequestMethod.POST)
-    public String selectDict(@ModelAttribute("model") ModelCont component, Model model) throws IOException {
-        ObjectMapper mapper=new ObjectMapper();
-        ModelDictionary user = (ModelDictionary) mapper.readValue(component.getStr(), ModelDictionary.class);
-        model.addAttribute("modelDictionary",user);
-        return "UDdict";
-    }
-    @RequestMapping(value = "/update", method=RequestMethod.POST)
-    @ResponseBody
-    public String update(@ModelAttribute("model") ModelDictionary component, Model model) throws IOException {
-        try {
-            modelService.Update(component,service);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "ok: <a href=\"dictionary\"/>";
-    }
+
+
 }
