@@ -27,11 +27,11 @@ public class ModelService {
             //throw new Exception("Not valid key");
     }
 
-    public List<String> Serch(ModelDictionary model, ISlovService service) throws Exception{
-        if (Check.validKey(model)) {
+    public List<ModelDictionary> Serch(ModelDictionary model, ISlovService service) throws Exception{
+        //if (Check.validKey(model)) {
             return service.serch(model);
-        }
-        throw new Exception("Not valid key");
+        //}
+        //throw new Exception("Not valid key");
     }
 
     public void Add(ModelDictionary model, ISlovService service) throws Exception{

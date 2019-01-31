@@ -8,6 +8,6 @@ public interface ISlovService {
     List<ModelDictionary> all(ModelDictionary model);
     void update(ModelDictionary model);
     void delete(ModelDictionary model);
-    List<String> serch(ModelDictionary model) throws Exception;
+    List<ModelDictionary> serch(ModelDictionary model) throws Exception;
     void add(ModelDictionary model) throws Exception;
 }

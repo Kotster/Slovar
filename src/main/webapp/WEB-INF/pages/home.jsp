@@ -15,10 +15,13 @@
 </head>
     <body>
     <form:form action="/dict" modelAttribute="model" method="post">
-        <form:select path="modelDictionary.name" onchange="submit();">
+        <form:select path="name" onchange="submit();">
             <form:option value=""></form:option>
             <form:options items="${ListDict}"/>
         </form:select>
     </form:form>
+    <a href="/add/getadd">Add</a>
+    <a href="/delete/getdelete">Delete</a>
+    <a href="/update/getupdate">Update</a>
     </body>
 </html>

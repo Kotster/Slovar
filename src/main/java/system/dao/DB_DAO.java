@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.ModelDictionary;
 
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,10 +43,10 @@ public class DB_DAO implements ISlovService {
     @Override
     @Transactional
     public void update(ModelDictionary model) {
-        List<String> list=serch(model);
+        List<ModelDictionary> list=serch(model);
         ModelDictionary slovarModel=new ModelDictionary(model.getKey(),model.getValue());
-        slovarModel.setId(Integer.parseInt(list.get(0)));
-        slovarModel.setname(list.get(3));
+        slovarModel.setId(list.get(0).getId());
+        slovarModel.setname(list.get(0).getName());
         Session session=sessionFactory.getCurrentSession();
         session.clear();
         session.update(slovarModel);
@@ -56,21 +54,21 @@ public class DB_DAO implements ISlovService {
     @Override
     @Transactional
     public void delete(ModelDictionary model) {
-        List<String> list=serch(model);
-        model.setId(Integer.parseInt(list.get(0)));
-        model.setValue(list.get(2));
-        model.setname(list.get(3));
+        List<ModelDictionary> list=serch(model);
+        model.setId(list.get(0).getId());
+        model.setValue(list.get(0).getValue());
+        model.setname(list.get(0).getName());
         currentSession().clear();
         currentSession().delete(model);
     }
     @Override
-    public List<String> serch(ModelDictionary model) {
+    public List<ModelDictionary> serch(ModelDictionary model) {
         Session session=currentSession();
         CriteriaBuilder cb =session.getCriteriaBuilder();
         CriteriaQuery<ModelDictionary> query=cb.createQuery(ModelDictionary.class);
         Root<ModelDictionary> root=query.from(ModelDictionary.class);
         ModelDictionary slovarModel= session.createQuery(query.where(cb.equal(root.get("key"), model.getKey()))).getResultList().get(0);
-        return new ArrayList<String>(Arrays.asList(slovarModel.getId()+"",slovarModel.getKey(),slovarModel.getValue(),slovarModel.getName()));
+        return Arrays.asList(slovarModel);
     }
     @Override
     @Transactional

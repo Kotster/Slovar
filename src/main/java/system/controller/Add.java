@@ -14,10 +14,11 @@ import system.model.ModelDictionary;
 import system.service.ModelService;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping(value = "/add")
-public class Add {
+public class Add{
 
     @Autowired
     ModelService modelService;
@@ -26,21 +27,37 @@ public class Add {
     @Qualifier("DB_DAO")
     ISlovService service;
 
+    @Autowired
+    @Qualifier("dictionary1")
+    ModelDictionary model1;
+
+    @Autowired
+    @Qualifier("dictionary2")
+    ModelDictionary model2;
+
     @RequestMapping(value = "/getadd", method = RequestMethod.GET)
-    public ModelAndView show() {
+    public ModelAndView showadd() {
         ModelAndView view=new ModelAndView();
         view.addObject("model", new ModelDictionary());
-        view.setViewName("Delete");
+        view.addObject("ListDict", Arrays.asList(model1.getName(),model2.getName()));
+        view.setViewName("Add");
         return view;
     }
     @RequestMapping(value = "/postadd", method=RequestMethod.POST)
-    @ResponseBody
-    public String update(@ModelAttribute("model") ModelDictionary component, Model model) throws IOException {
+    //@ResponseBody
+    public String add(@ModelAttribute("model") ModelDictionary component, Model model) throws IOException {
         try {
-            modelService.Delete(component,service);
+            if(component.getName().equals(model1.getName())){
+                component.setReg(model1.getReg());
+                component.setKeyLength(model1.getKeyLength());
+                modelService.Add(component,service);
+            }
+            component.setReg(model2.getReg());
+            component.setKeyLength(model2.getKeyLength());
+            modelService.Add(component,service);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "ok";
+        return "redirect:/add/getadd";
     }
 }

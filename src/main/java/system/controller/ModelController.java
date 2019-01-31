@@ -1,21 +1,17 @@
 package system.controller;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import system.dao.ISlovService;
-import system.model.ModelCont;
 import system.model.ModelDictionary;
 import system.service.ModelService;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
 
 @Controller
@@ -40,14 +36,14 @@ public class ModelController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showModel() {
         ModelAndView view=new ModelAndView();
-        view.addObject("model", new ModelCont());
+        view.addObject("model", new ModelDictionary());
         view.addObject("ListDict", Arrays.asList(model1.getName(),model2.getName()));
         view.setViewName("home");
         return view;
     }
     @RequestMapping(value = "/dict", method=RequestMethod.POST)
-    public String post(@ModelAttribute("model") ModelCont component, Model model)  {
-        model.addAttribute("list", modelService.Show(service, component.getModelDictionary()));
+    public String post(@ModelAttribute("model") ModelDictionary component, Model model)  {
+        model.addAttribute("list", modelService.Show(service, component));
         return "dictionary";
     }
 

@@ -12,12 +12,12 @@
     <title>Title</title>
 </head>
 <body>
-    <form:form modelAttribute="model" action="select/selectDict" method="post">
-        <form:select path="str" onchange="submit();">
+    <form:form modelAttribute="model">
+        <form:select path="name">
             <form:option value=""></form:option>
             <form:options items="${list}"/>
         </form:select>
     </form:form>
-    <<a href="/">back to select dictionary</a>
+    <<a href="/">home</a>
 </body>
 </html>

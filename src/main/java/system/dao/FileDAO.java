@@ -72,14 +72,17 @@ public class FileDAO implements ISlovService {
     }
 
     @Override
-    public List<String> serch(ModelDictionary model) throws Exception {
+    public List<ModelDictionary> serch(ModelDictionary model) throws Exception {
         File file = Check.notFile(new File(model.getName()));
         String str = "";
+        String key="",value="";
         try {
             read = new BufferedReader(new FileReader(file));
             while (read.ready()) {
                 if ((str = read.readLine()).split("-")[0].trim().equals(model.getKey())) {
-                    return Arrays.asList(str);
+                    key=str.split("-")[0].trim();
+                    value=str.split("-")[1].trim();
+                    return Arrays.asList(new ModelDictionary(key,value));
                 }
             }
             read.close();
