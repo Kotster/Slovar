@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}webapp/WEB-INF/js/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
