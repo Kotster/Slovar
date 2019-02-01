@@ -41,6 +41,7 @@ public class ModelController {
         view.setViewName("home");
         return view;
     }
+
     @RequestMapping(value = "/dict", method=RequestMethod.POST)
     public String post(@ModelAttribute("model") ModelDictionary component, Model model)  {
         model.addAttribute("list", modelService.Show(service, component));
