@@ -12,11 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form:form modelAttribute="model" action="/update/postupdate" method="post">
-        <form:input  path="key"></form:input>
-        <form:input path="value"></form:input>
-        <form:button>check</form:button>
-    </form:form>
+
     <a href="/">home</a>
 </body>
 </html>

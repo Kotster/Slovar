@@ -12,23 +12,98 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
     <body>
-    <form:form action="/dict" modelAttribute="model" method="post">
-        <form:select path="name" onchange="submit();">
-            <form:option value=""></form:option>
-            <form:options items="${ListDict}"/>
-        </form:select>
-    </form:form>
-    <form:form action="/dict" modelAttribute="model" method="post">
-        <form:select path="" onchange="submit();">
-            <form:option value=""></form:option>
-            <form:options items="${ListDict}"/>
-        </form:select>
-    </form:form>
-    <a href="/add/getadd">Add</a>
-    <a href="/delete/getdelete">Delete</a>
-    <a href="/update/getupdate">Update</a>
-    <a href="/search/getsearch">Search</a>
+    <script type="text/javascript">
+        function search() {
+
+            var key = document.getElementById("inp").value;
+            $.ajax({
+                url: 'http://localhost:8081/rest/postsearch',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                data:({
+                    key:key
+                }),
+                success: function (data) {
+
+                    $("#id").text(data.id);
+                    $("#key").text(data.key);
+                    $("#value").text(data.value);
+                    $("#name").text(data.name);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR: " + textStatus + " - " + errorThrown);
+                }
+            });
+        }
+        function listDict() {
+            $.ajax({
+                url: 'http://localhost:8081/rest/getlistdict',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                success: function (data) {
+                     var option="<option></option>";
+                    for (var i=0;i<data.length;i++){
+                        option+="<option id="+data[i]+">"+data[i]+"</option>";
+                        console.log(option);
+                    }
+                    $("#dict").append(option);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR: " + textStatus + " - " + errorThrown);
+                }
+            });
+        }
+        function update() {
+            $.ajax({
+                url: 'http://localhost:8081/rest/postupdate',
+                type: 'PUT',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                date:({
+                    "key":document.getElementById("keyinput").value,
+                    "value":document.getElementById("valueinput").value
+                }),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR: " + textStatus + " - " + errorThrown);
+                }
+            });
+        }
+        $(document).ready ( function(){
+            listDict();
+        });
+    </script>
+
+    <div>
+        <h1>Select dictionary</h1>
+        <select id="dict">
+        </select>
+    </div>
+
+    <div>
+        <h1>Search</h1>
+        <label for="inp">key:</label><input type="text" id="inp"/>
+        <label for="inp">id:</label><h3 id="id"></h3>
+        <label for="inp">key:</label><h3 id="key"></h3>
+        <label for="inp">value:</label><h3 id="value"></h3>
+        <label for="inp">name:</label><h3 id="name"></h3>
+        <button type="button" onclick="search();return false;">Search</button>
+    </div>
+    <div>
+        <h1>Update</h1>
+        <label for="keyinput">key:</label><input id="keyinput"/>
+        <label for="valueinput">value:</label><input id="valueinput"/>
+        <button type="button" onclick="update();return false;">Update</button>
+    </div>
     </body>
 </html>
