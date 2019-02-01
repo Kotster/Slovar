@@ -61,16 +61,17 @@
             });
         }
         function update() {
+            var data={
+                "key":document.getElementById("keyinput").value,
+                "value":document.getElementById("valueinput").value
+            };
             $.ajax({
                 url: 'http://localhost:8081/rest/postupdate',
-                type: 'PUT',
+                type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
                 mimeType: 'application/json',
-                date:({
-                    "key":document.getElementById("keyinput").value,
-                    "value":document.getElementById("valueinput").value
-                }),
+                date:JSON.stringify(data),
                 success: function (data) {
                     alert(data);
                 },

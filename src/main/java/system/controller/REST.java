@@ -101,11 +101,11 @@ public class REST {
     }
 
     @RequestMapping(value = "/postupdate", method=RequestMethod.POST)
-    public String update(String string) {
+    public String update(@RequestBody String data) {
         ObjectMapper objectMapper=new ObjectMapper();
-        ModelDictionary component=new ModelDictionary();
+        ModelDictionary component;
         try {
-            component = objectMapper.readValue(string, ModelDictionary.class);
+            component = objectMapper.readValue(data, ModelDictionary.class);
             modelService.Update(component,service);
         } catch (Exception e) {
             e.printStackTrace();
