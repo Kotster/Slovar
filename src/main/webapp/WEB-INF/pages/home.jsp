@@ -20,8 +20,15 @@
             <form:options items="${ListDict}"/>
         </form:select>
     </form:form>
+    <form:form action="/dict" modelAttribute="model" method="post">
+        <form:select path="" onchange="submit();">
+            <form:option value=""></form:option>
+            <form:options items="${ListDict}"/>
+        </form:select>
+    </form:form>
     <a href="/add/getadd">Add</a>
     <a href="/delete/getdelete">Delete</a>
     <a href="/update/getupdate">Update</a>
+    <a href="/search/getsearch">Search</a>
     </body>
 </html>

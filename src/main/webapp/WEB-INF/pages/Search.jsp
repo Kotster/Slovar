@@ -15,9 +15,8 @@
 <body>
 <script type="text/javascript">
     function doAjax() {
-        // var key = $("#inp").val();
+
         var key = document.getElementById("inp").value;
-        alert(key);
         $.ajax({
             url: 'http://localhost:8081/search/postsearch',
             type: 'GET',
@@ -28,22 +27,19 @@
                 key:key
             }),
             success: function (data) {
-                //$("#id").text(data.id);
-                document.getElementById("id").innerHTML=data.id;
-                $("#key").text(data.key);
-                $("#value").text(data.value);
-                $("#name").text(data.name);
-                console.log(data);
+
+                $("#id").text("id:"+data.id);
+                $("#key").text("key:"+data.key);
+                $("#value").text("value:"+data.value);
+                $("#name").text("table:"+data.name);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log("ERROR: " + textStatus + " - " + errorThrown);
             }
         });
-        alert(document.getElementById("id").value);
     }
-    alert("End");
 </script>
-<input type="text" id="inp" value="123"/>
+<input type="text" id="inp"/>
     <p id="id"></p>
     <p id="key"></p>
     <p id="value"></p>

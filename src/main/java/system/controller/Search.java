@@ -11,6 +11,7 @@ import system.dao.ISlovService;
 import system.model.ModelDictionary;
 import system.service.ModelService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,14 +35,14 @@ public class Search {
     @RequestMapping(value = "/postsearch", method=RequestMethod.GET)
     @ResponseBody
     public ModelDictionary search(String key){
+            List<ModelDictionary> list=new ArrayList<>();
         try {
             ModelDictionary modelDictionary=new ModelDictionary();
             modelDictionary.setKey(key);
-            List<ModelDictionary> list=modelService.Serch(modelDictionary,service);
-
+            list = modelService.Serch(modelDictionary,service);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ModelDictionary();
+        return list.get(0);
     }
 }
