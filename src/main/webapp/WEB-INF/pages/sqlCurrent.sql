@@ -1,4 +1,4 @@
-create database testflyway;
+create database flyway;
 
 create table flyway_schema_history
 (
@@ -24,7 +24,10 @@ create table senders
   sender_id     serial       not null
     constraint pk_senders
     primary key,
-  project_id    integer,
+  project_id    integer
+    constraint senders_projects_project_id_fk
+    references projects
+    on delete cascade,
   email_from    varchar(255) not null,
   location_name varchar(255) not null,
   report_rate   bigint       not null,
@@ -301,9 +304,15 @@ create table weathercompanies
   weather_id   integer not null
     constraint weather_companies_weatherservice_service_id_fk
     references weatherservice,
+  id_config    integer
+    constraint weathercompanies_weatherconfig_id_fk
+    references weatherconfig,
   constraint weather_project_project_id_weather_id_pk
   primary key (companies_id, weather_id)
 );
+
+create unique index weathercompanies_id_config_uindex
+  on weathercompanies (id_config);
 
 create table mapcompanies
 (
@@ -333,11 +342,12 @@ create table projectcompanies
 (
   id_project   integer not null
     constraint projectcompanies_projects_project_id_fk
-    references projects,
+    references projects
+    on delete cascade,
   id_companies integer not null
     constraint projectcompanies_companies_company_id_fk
-    references companies,
+    references companies
+    on delete cascade,
   constraint projectcompanies_id_project_id_companies_pk
   primary key (id_project, id_companies)
 );
-
