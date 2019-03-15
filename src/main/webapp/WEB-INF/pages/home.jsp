@@ -40,7 +40,7 @@
                 }
             });
         }
-        function listDict() {
+        function listnameDict() {
             $.ajax({
                 url: 'http://localhost:8081/rest/getlistdict',
                 type: 'GET',
@@ -54,6 +54,32 @@
                         console.log(option);
                     }
                     $("#dict").append(option);
+                    $("#dictadd").append(option);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR: " + textStatus + " - " + errorThrown);
+                }
+            });
+        }
+        function listDict() {
+            $("#dictionary").empty();
+            var e=document.getElementById("dict");
+            $.ajax({
+                url: 'http://localhost:8081/rest/getlistrecords',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                data:({
+                    string:e[e.selectedIndex].value
+                }),
+                success: function (data) {
+                     var option="<option></option>";
+                    for (var i=0;i<data.length;i++){
+                        option+="<option id="+data[i].id+">"+"key:"+data[i].key+" value:"+data[i].value+"</option>";
+                        console.log(option);
+                    }
+                    $("#dictionary").append(option);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("ERROR: " + textStatus + " - " + errorThrown);
@@ -71,7 +97,29 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 mimeType: 'application/json',
-                date:JSON.stringify(data),
+                data:JSON.stringify(data),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR: " + textStatus + " - " + errorThrown);
+                }
+            });
+        }
+        function recordadd() {
+            var e=document.getElementById("dictadd");
+            var data={
+                "key":document.getElementById("keyadd").value,
+                "value":document.getElementById("valueadd").value,
+                "name":e[e.selectedIndex].value
+            };
+            $.ajax({
+                url: 'http://localhost:8081/rest/postadd',
+                type: 'PUT',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                data:JSON.stringify(data),
                 success: function (data) {
                     alert(data);
                 },
@@ -81,13 +129,16 @@
             });
         }
         $(document).ready ( function(){
-            listDict();
+            listnameDict();
         });
     </script>
 
     <div>
         <h1>Select dictionary</h1>
-        <select id="dict">
+        <select id="dict" onchange="listDict();return false;">
+        </select>
+        <h1>Dictionary</h1>
+        <select id="dictionary">
         </select>
     </div>
 
@@ -105,6 +156,21 @@
         <label for="keyinput">key:</label><input id="keyinput"/>
         <label for="valueinput">value:</label><input id="valueinput"/>
         <button type="button" onclick="update();return false;">Update</button>
+    </div>
+    <div>
+        <h1>Save</h1>
+        <label>
+            key:<input id="keyadd"/>
+        </label>
+        <label>
+            value:<input id="valueadd"/>
+        </label>
+        <label>
+            dictionary:
+            <select id="dictadd">
+            </select>
+        </label>
+        <button type="button" onclick="recordadd();return false;">check</button>
     </div>
     </body>
 </html>

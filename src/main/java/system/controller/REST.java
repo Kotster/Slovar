@@ -10,6 +10,7 @@ import system.dao.ISlovService;
 import system.model.ModelDictionary;
 import system.service.ModelService;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,9 +53,8 @@ public class REST {
 
         return Arrays.asList(model1.getName(),model2.getName());
     }
-
     @RequestMapping(value = "/postadd", method=RequestMethod.PUT)
-    public String add(String string){
+    public String add(@RequestBody String string){
         ObjectMapper objectMapper=new ObjectMapper();
         try {
             ModelDictionary component=objectMapper.readValue(string, ModelDictionary.class);
@@ -64,9 +64,11 @@ public class REST {
                 component.setKeyLength(model1.getKeyLength());
                 modelService.Add(component,service);
             }
-            component.setReg(model2.getReg());
-            component.setKeyLength(model2.getKeyLength());
-            modelService.Add(component,service);
+            else{
+                component.setReg(model2.getReg());
+                component.setKeyLength(model2.getKeyLength());
+                modelService.Add(component,service);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "Error";
@@ -89,15 +91,17 @@ public class REST {
     }
 
     @RequestMapping(value = "/getlistrecords", method=RequestMethod.GET)
-    public List<ModelDictionary> listrecords(String string)  {
-        ObjectMapper objectMapper=new ObjectMapper();
-        ModelDictionary component=new ModelDictionary();
-        try {
-            component = objectMapper.readValue(string, ModelDictionary.class);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return modelService.Show(service, component);
+    public List<ModelDictionary> listrecords(@RequestParam String string)  {
+//        ObjectMapper objectMapper=new ObjectMapper();
+//        ModelDictionary component=new ModelDictionary();
+//        try {
+            //component = objectMapper.readValue(string, ModelDictionary.class);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+        ModelDictionary modelDictionary=new ModelDictionary();
+        modelDictionary.setname(string);
+        return modelService.Show(service, modelDictionary);
     }
 
     @RequestMapping(value = "/postupdate", method=RequestMethod.POST)
